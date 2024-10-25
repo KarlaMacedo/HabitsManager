@@ -13,7 +13,7 @@ export const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        {/* Envolvemos Dashboard en PrivateRoute */}
+        {/* Dashboard sera PrivateRoute redirigiendo si no esta auth */}
         <Route
           path="/dashboard"
           element={
