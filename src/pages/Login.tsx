@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/dashboard");// Redirige a dashboard si autentica
     } catch (err) {
-      setError("Error de inicio de sesión. Por favor, revisa tus credenciales.");
+      setError("Error de inicio de sesión. Revisa tus credenciales.");
     }
   };
 
