@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebase";
 
-export const useAuth = () => {
+export const useAuth = () => {//Custom hook
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true); // Añadimos un estado de carga
 
