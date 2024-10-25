@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase"; // Asegúrate de tener Firebase configurado
+import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export const SignUp: React.FC = () => {
@@ -14,7 +14,7 @@ export const SignUp: React.FC = () => {
     setError(null);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard"); // Redirige al usuario al panel después de registrarse
+      navigate("/dashboard"); // al registrarse exitosamente dirige al dashboard
     } catch (err) {
       setError("Error al crear la cuenta. Intenta nuevamente.");
     }
@@ -38,7 +38,7 @@ export const SignUp: React.FC = () => {
         />
         <button type="submit">Crear Cuenta</button>
       </form>
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>} {/* si hay un error lo muestra */}
       <p>
         ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
       </p>

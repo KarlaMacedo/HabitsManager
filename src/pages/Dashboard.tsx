@@ -3,7 +3,7 @@ import { auth } from "../firebase";
 
 export const Dashboard: React.FC = () => {
   const handleLogout = () => {
-    auth.signOut(); // Cierra sesión y el usuario será redirigido al login
+    auth.signOut(); // Cierra sesión y redirige a login
   };
 
   return (

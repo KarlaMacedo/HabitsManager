@@ -14,7 +14,7 @@ export const Login: React.FC = () => {
     setError(null);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard");
+      navigate("/dashboard");// Redirige a dashboard si autentica
     } catch (err) {
       setError("Error de inicio de sesión. Por favor, revisa tus credenciales.");
     }
@@ -38,7 +38,7 @@ export const Login: React.FC = () => {
         />
         <button type="submit">Iniciar Sesión</button>
       </form>
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>} {/* si hay un error lo muestra */}
       <p>
         ¿No tienes una cuenta? <a href="/signup">Regístrate</a>
       </p>
