@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -40,7 +41,7 @@ export const SignUp: React.FC = () => {
       </form>
       {error && <p>{error}</p>} {/* si hay un error lo muestra */}
       <p>
-        ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
+        ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión aquí</Link>
       </p>
     </div>
   );
