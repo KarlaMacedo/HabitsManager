@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { collection, addDoc, getDocs, updateDoc, doc, arrayUnion, Timestamp } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, doc, arrayUnion } from "firebase/firestore";
 
 interface Habit {
   id: string;
   name: string;
-  completionLog: Date[]; //Arry de fechas de completado
+  completionLog: string[]; //Arry de fechas de completado
 }
 
 export const useHabits = () => {
@@ -26,14 +26,17 @@ export const useHabits = () => {
 
   const toggleHabitCompletion = async (id: string) => {//recibe id
     try {
+      const today = new Date().toISOString().split('T')[0]; // Solo la fecha en formato YYYY-MM-DD;
       const habitRef = doc(db, "habits", id);
+
       await updateDoc(habitRef, {
-        completionLog: arrayUnion(Timestamp.now()),//agrega fecha actual al array de la data
+        completionLog: arrayUnion(today),//agrega fecha actual al array de la data
       });
+
       setHabits((prevHabits) => //actualiza la lista de habitos del estado
         prevHabits.map((habit) =>
           habit.id === id
-            ? { ...habit, completionLog: [...habit.completionLog, new Date()] }
+            ? { ...habit, completionLog: [...habit.completionLog, today] }
             : habit
         )
       );

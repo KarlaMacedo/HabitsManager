@@ -23,11 +23,9 @@ export const Dashboard: React.FC = () => {
   
   if (loading) return <p>Cargando hábitos...</p>;
 
-  const isCompletedToday = (completionLog: Date[]) => {//verifica si el hábito está completado hoy revisando el array de fechas
-    const today = new Date().toDateString();
-    return completionLog.some(
-      (date) => new Date(date).toDateString() === today
-    );
+  const isCompletedToday = (completionLog: string[]): boolean => {//verifica si el hábito está completado hoy revisando el array de fechas
+    const today = new Date().toISOString().split('T')[0]; // Obtener la fecha de hoy como cadena
+    return completionLog.includes(today); // Comprobar si hoy está en el log de completados
   };  
 
   return (
