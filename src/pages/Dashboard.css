@@ -1,0 +1,30 @@
+form, ul {
+    margin-bottom: 20px;
+  }
+  
+  form input {
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  form button, ul button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #f0f0f0;
+  }
+  

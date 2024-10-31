@@ -30,12 +30,14 @@ export const SignUp: React.FC = () => {
           placeholder="Correo electrónico"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2 mr-4 w-full"
         />
         <input
           type="password"
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2 mr-4 w-full"
         />
         <button type="submit">Crear Cuenta</button>
       </form>
