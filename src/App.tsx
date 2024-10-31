@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { Dashboard } from "./pages/Dashboard";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import "./App.css"
 
 export const App: React.FC = () => {
   return (
