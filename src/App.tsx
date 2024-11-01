@@ -5,11 +5,13 @@ import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { Dashboard } from "./pages/Dashboard";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import { Navbar } from "./components/Navbar";
 import "./App.css"
 
 export const App: React.FC = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
