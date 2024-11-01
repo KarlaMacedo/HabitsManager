@@ -21,7 +21,7 @@ export const SignIn = () => {
 
   return (
     <div>
-      <h2>Iniciar Sesión</h2>
+      <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
       <form onSubmit={handleSignIn}>
         <input
           type="email"

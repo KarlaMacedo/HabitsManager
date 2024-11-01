@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, addDoc, getDocs, updateDoc, doc, arrayUnion } from "firebase/firestore";
 
-interface Habit {
+export interface Habit {
   id: string;
   name: string;
   completionLog: string[]; //Arry de fechas de completado
