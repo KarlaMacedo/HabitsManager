@@ -2,8 +2,10 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(ChartDataLabels);
 
 interface HabitChartProps {//estructura del componente
   completionLog: string[]; // Array de fechas completadas en formato "YYYY-MM-DD"
@@ -46,21 +48,27 @@ export const HabitChart: React.FC<HabitChartProps> = ({ completionLog, timeFrame
     scales: {
         y: {
             ticks: {
-                display: timeFrame != "monthly", // Oculta las etiquetas del eje Y si es mensual
+                display: false, // Oculta las etiquetas 
             },
             grid: {
-                display: timeFrame != "monthly", // Oculta las líneas de la cuadrícula del eje Y si es mensual
+                display: false, // Oculta las líneas de la cuadrícula 
             },
         },
         x: {
           grid: {
-              display: timeFrame != "monthly", // Oculta las líneas de la cuadrícula del eje X si es mensual
+              display: false, // Oculta las líneas de la cuadrícula 
           },
         }
     },
     plugins: {
       legend: { position: "top" as const },
       title: { display: true, text: `Progreso de Hábito - ${timeFrame === "monthly" ? "Este Mes" : "Este Año"}` },
+      datalabels: {
+          anchor: 'end' as const,
+          align: 'end' as const,
+          formatter: (value: number) => value !== 0 && timeFrame != "monthly" ? value.toString() : '', // Solo muestra el valor si no es 0
+          color: 'black', // Color de las etiquetas
+      },
     },
   };
 
