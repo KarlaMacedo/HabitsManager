@@ -22,26 +22,28 @@ export const SignUp: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Registrarse</h2>
-      <form onSubmit={handleSignUp}>
+    <div className="max-w-2xl mx-auto w-full h-full">
+      <h2 className="text-4xl font-bold mb-10">Registrarse</h2>
+      <form onSubmit={handleSignUp} className="flex flex-col gap-10 items-center">
         <input
           type="email"
           placeholder="Correo electrónico"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2 mr-4 w-80"
         />
         <input
           type="password"
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="border border-gray-300 rounded px-4 py-2 mr-4 w-80"
         />
-        <button type="submit">Crear Cuenta</button>
+        <button type="submit" className="bg-blue-500 text-white px-4 py-3 rounded hover:bg-blue-600 transition-all w-60">Crear Cuenta</button>
       </form>
-      {error && <p>{error}</p>} {/* si hay un error lo muestra */}
+      {error && <p className="text-red-600 font-bold">{error}</p>} {/* si hay un error lo muestra */}
       <p>
-        ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión aquí</Link>
+        ¿Ya tienes una cuenta? <Link to="/login" className="text-indigo-600 font-bold no-underline hover:underline">Inicia sesión aquí</Link>
       </p>
     </div>
   );

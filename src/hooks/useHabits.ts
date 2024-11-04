@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { collection, addDoc, getDocs, updateDoc, doc, arrayUnion } from "firebase/firestore";
 
-interface Habit {
+export interface Habit {
   id: string;
   name: string;
   completionLog: string[]; //Arry de fechas de completado
@@ -58,9 +58,20 @@ export const useHabits = () => {
     }
   };
 
+  const getLastDaysCompletion = (days: number ,completionLog: string[]): boolean[] => {//recibe el array de fechas y devuelve array de boolean
+    const today = new Date();
+    return Array.from({ length: days }).map((_, i) => { //array de n elementos, sin valor actual _ y con el indice del elemento i
+      const day = new Date(today); //copia de hoy para no modificar fecha original
+      day.setDate(today.getDate() - i);// obtiene las fechas de los días anteriores
+      const dayString = day.toISOString().split("T")[0]; //convierte a string "YYYY-MM-DD"
+      return completionLog.includes(dayString); //verifica si esta presente en el array de fechas
+    }).reverse();// se invierte para devolver del día más reciente al actual
+  };
+  
+
   useEffect(() => {
     fetchHabits();//detenemos la escucha ejecutando la referencia
   }, []);
 
-  return { habits, loading, toggleHabitCompletion, addHabit }; //retorna lista de habit, flag carga data, funcion marcar coplete y add habit
+  return { habits, loading, toggleHabitCompletion, addHabit, getLastDaysCompletion }; //retorna lista de habit, flag carga data, funcion marcar coplete y add habit
 };
