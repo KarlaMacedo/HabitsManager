@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { Dashboard } from "./pages/Dashboard";
 import { PrivateRoute } from "./routes/PrivateRoute";
+import "./App.css"
 
 export const App: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ export const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        {/* Envolvemos Dashboard en PrivateRoute */}
+        {/* Dashboard sera PrivateRoute redirigiendo si no esta auth */}
         <Route
           path="/dashboard"
           element={
