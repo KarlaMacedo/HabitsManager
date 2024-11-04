@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
-import { collection, addDoc, getDocs, updateDoc, doc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc, getDocs, updateDoc, doc, arrayUnion, query, where } from "firebase/firestore";
+import { auth } from "../firebase";
 
 export interface Habit {
   id: string;
   name: string;
   completionLog: string[]; //Arry de fechas de completado
+  userId: string; // Agregamos el userId para identificar el propietario
 }
 
 export const useHabits = () => {
@@ -13,13 +15,18 @@ export const useHabits = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchHabits = async () => {//escucha cambios en la data
+    if (!auth.currentUser) return; // Asegurarse de que el usuario esté autenticado
+
     setLoading(true);//bandera cargando
     const habitsCollection = collection(db, "habits");
-    const habitsSnapshot = await getDocs(habitsCollection);//obtiene data
+    const userHabitsQuery = query(habitsCollection, where("userId", "==", auth.currentUser.uid)); // Trae solo los hábitos del usuario
+    const habitsSnapshot = await getDocs(userHabitsQuery);//obtiene data
+    
     const habitsData = habitsSnapshot.docs.map((doc) => ({//setea el id y toda la data como el objeto de su interfaz
       id: doc.id,
       ...doc.data(),
     })) as Habit[];
+
     setHabits(habitsData);//setea data a estado
     setLoading(false);//down bandera
   };
@@ -47,8 +54,10 @@ export const useHabits = () => {
 
   const addHabit = async (name: string) => {
     try {
-      const newHabit = { name, completionLog: [] };
+      const userId = auth.currentUser ? auth.currentUser.uid : ""; // Obtener el userId del usuario autenticado
+      const newHabit = { name, completionLog: [], userId };
       const habitRef = await addDoc(collection(db, "habits"), newHabit);//agrega a la data el habito
+      
       setHabits((prevHabits) => [
         ...prevHabits,
         { id: habitRef.id, ...newHabit },
