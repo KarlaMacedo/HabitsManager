@@ -51,7 +51,7 @@ export const Dashboard: React.FC = () => {
   if (loading) return <p className="text-center">Cargando hábitos...</p>;
 
   return (
-    <div className="max-w-6xl mx-auto w-full h-full mt-8">
+    <div className="max-w-6xl mx-auto w-full h-full mt-8 p-2 ">
       <div className="grid grid-cols-3 gap-4">
       <button
           onClick={handleLogout}
